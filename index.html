@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR Block Blast - Điều Khiển Cử Chỉ Tay</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- MediaPipe Hands & Camera Utils -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Video ẩn dùng làm đầu vào cho MediaPipe, chúng ta sẽ vẽ lên Canvas -->
+    <video id="webcam" autoplay playsinline style="display: none;"></video>
+
+    <!-- Canvas chính hiển thị Camera + Game + Hiệu ứng bàn tay -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD Thông tin trên cùng -->
+    <div id="hud">
+      <div class="hud-card brand">
+        <span class="badge">AR GAME</span>
+        <h1>BLOCK BLAST</h1>
+      </div>
+
+      <div class="hud-stats">
+        <div class="stat-box">
+          <span class="stat-label">ĐIỂM SỐ</span>
+          <span id="scoreValue" class="stat-value">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">KỶ LỤC</span>
+          <span id="bestScoreValue" class="stat-value">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">COMBO</span>
+          <span id="comboValue" class="stat-value">x1</span>
+        </div>
+      </div>
+
+      <div class="hud-controls">
+        <label class="toggle-label" title="Bật/Tắt hiển thị hình ảnh camera nền">
+          <input type="checkbox" id="toggleCameraBg" checked />
+          <span>Hiện Camera</span>
+        </label>
+        <button id="resetBtn" class="btn-action">Chơi Lại</button>
+      </div>
+    </div>
+
+    <!-- Thanh trạng thái & hướng dẫn cử chỉ -->
+    <div id="gestureBar">
+      <div class="status-indicator">
+        <span id="camDot" class="dot loading"></span>
+        <span id="statusText">Đang khởi động Camera & AI nhận diện bàn tay...</span>
+      </div>
+      <div class="instructions">
+        <span>👌 <b>Chụm ngón cái + ngón trỏ</b> vào chấm tâm khối để gắp</span>
+        <span>•</span>
+        <span>🖐️ <b>Giữ chụm & di chuyển</b> lên bảng 8×8</span>
+        <span>•</span>
+        <span>✨ <b>Mở 2 ngón tay</b> để thả khối</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
